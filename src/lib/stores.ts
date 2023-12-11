@@ -11,7 +11,6 @@ export interface User {
 	picture?: string;
 	uid?: string;
 }
-export const storeUser: Writable<User | undefined> = writable(undefined);
 
 let navTimer: number | NodeJS.Timeout | null | undefined = null;
 export const navigationIsDelayed = derived(navigating, (newValue, set) => {

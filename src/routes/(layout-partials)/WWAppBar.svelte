@@ -2,7 +2,7 @@
 	import { Icon } from '@steeze-ui/svelte-icon';
 	import { Bars3 } from '@steeze-ui/heroicons';
 
-	// BlackCatUI
+	// Skeleton
 	import {
 		AppBar,
 		getDrawerStore,
@@ -19,8 +19,16 @@
 		drawerStore.open(s);
 	}
 
-	import { storeCurrentUrl, storeUser } from '$lib/stores';
-	import LogoutButton from '../../login/LogoutButton.svelte';
+	// Firebase
+	import { userStore } from 'sveltefire';
+	import { auth } from '$lib/client/firebase'; // your firebase auth instance
+
+	const user = userStore(auth);
+	user.subscribe((u) => console.log(u));
+
+	// Navigation
+	import { storeCurrentUrl } from '$lib/stores';
+	import LogoutButton from '../login/LogoutButton.svelte';
 
 	$: classesActive = (href: string) =>
 		$storeCurrentUrl?.split('/').at(-1) === href ? 'bg-primary-active-token hover:text-token' : '';
@@ -40,7 +48,7 @@
 				<AjAlt />
 			</a> -->
 			<!-- Title -->
-			<a href={$storeUser?.uid ? '/dashboard' : '/'} class="flex items-center">
+			<a href={$user?.uid ? '/dashboard' : '/'} class="flex items-center">
 				<span class="hidden hover:brightness-110 xl:flex xl:gap-1 sm:text-xl md:text-3xl">
 					WhiskerWord
 				</span>
@@ -48,7 +56,7 @@
 		</div>
 	</svelte:fragment>
 	<svelte:fragment slot="trail">
-		{#if $storeUser?.uid}
+		{#if $user?.uid}
 			<button
 				class="btn hover:variant-soft-primary"
 				aria-label="Popup Showing Theme Options"
@@ -59,10 +67,10 @@
 					middleware: { offset: { crossAxis: -20, mainAxis: 20 } }
 				}}
 			>
-				{#if $storeUser?.picture}
+				{#if $user?.photoURL}
 					<Avatar
 						class="w-8 h-8 text-4xl"
-						src={$storeUser.picture}
+						src={$user.photoURL}
 						alt="User Photo"
 						referrerpolicy="no-referrer"
 					/>
@@ -83,9 +91,9 @@
 					</div>
 					<hr />
 					<div class="flex flex-col gap-2 mt-2">
-						<div class="text-sm text-ellipsis">{$storeUser?.email}</div>
+						<div class="text-sm text-ellipsis">{$user?.email}</div>
 						<div class="flex gap-2">
-							<a class="btn variant-ringed-primary" href="/dashboard">Dashboard</a>
+							<a class="btn variant-ringed-primary" href="/">Home</a>
 							<LogoutButton />
 						</div>
 					</div>

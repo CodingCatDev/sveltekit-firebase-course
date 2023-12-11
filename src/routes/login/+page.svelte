@@ -9,9 +9,8 @@
 
 	import type { PageData } from './$types';
 	import EmailAuth from './EmailAuth.svelte';
-	import HomeProBenefits from '../(home-partials)/(home-pro-benefits)/HomeProBenefits.svelte';
 	export let data: PageData;
-	$: action = `?/login&redirectTo=${data.redirectTo ? data.redirectTo : '/dashboard'}`;
+	$: action = `?/login&redirectTo=${data.redirectTo ? data.redirectTo : '/'}`;
 </script>
 
 <LayoutWrapper>
@@ -24,5 +23,4 @@
 		<!-- <TwitterAuth /> -->
 		<GitHubAuth {action} />
 	</section>
-	<HomeProBenefits login={true} />
 </LayoutWrapper>

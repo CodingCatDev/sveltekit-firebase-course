@@ -1,5 +1,5 @@
 import { ccdCreateSessionCookie } from '$lib/server/firebase';
-import type { Actions, PageServerLoad } from './$types';
+import type { Actions } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
 
 //export const prerender = false;
@@ -36,7 +36,7 @@ export const load = async ({ parent, url }) => {
 	if (user)
 		throw redirect(
 			303,
-			`/account${
+			`/${
 				url.searchParams.has('redirectTo')
 					? '?redirectTo=' + url.searchParams.get('redirectTo')
 					: ''

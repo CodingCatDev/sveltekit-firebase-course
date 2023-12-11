@@ -2,15 +2,7 @@
 	import '../app.postcss';
 
 	// Skeleton Components
-	import {
-		AppShell,
-		AppBar,
-		Modal,
-		ProgressRadial,
-		Toast,
-		storePopup,
-		initializeStores
-	} from '@skeletonlabs/skeleton';
+	import { AppShell, storePopup, initializeStores } from '@skeletonlabs/skeleton';
 	initializeStores();
 
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
@@ -22,9 +14,7 @@
 
 <AppShell>
 	<svelte:fragment slot="header">
-		<AppBar>
-			<WwAppBar />
-		</AppBar>
+		<WwAppBar />
 	</svelte:fragment>
 	<!-- Page Route Content -->
 	<slot />

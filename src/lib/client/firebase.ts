@@ -10,11 +10,9 @@ import {
 	createUserWithEmailAndPassword
 } from 'firebase/auth';
 import {
-	getFirestore,
 	collection,
 	doc,
 	addDoc,
-	onSnapshot,
 	Firestore,
 	setDoc,
 	type DocumentData,
