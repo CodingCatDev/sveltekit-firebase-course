@@ -3,12 +3,12 @@
 </script>
 
 <div class="container h-full mx-auto flex justify-center p-8">
-	<div class="space-y-10 text-center flex flex-col items-center">
+	<div class="text-center flex flex-col items-center gap-8 w-full">
 		<Collection ref="posts" let:data={posts}>
 			{#each posts as post}
-				<div class="anim-float-card absolute z-[1] w-full max-w-lg">
+				<div class="anim-float-card w-full">
 					<a class="block card card-hover p-4 space-y-2" href={post.slug}
-						><div class="flex items-center gap-4">
+						><div class="flex gap-4">
 							<figure
 								class="avatar flex aspect-square text-surface-50 font-semibold justify-center items-center overflow-hidden isolate bg-surface-400-500-token w-16 rounded-full"
 								data-testid="avatar"
@@ -25,12 +25,11 @@
 								<small class="opacity-50">@SkeletonUI</small>
 							</div>
 						</div>
-						<p class="whitespace-nowrap">UI toolkit for Svelte and Tailwind.</p>
-						<div class="flex just gap-4">
-							<small><strong>50</strong> <span class="opacity-50">Following</span></small>
-							<small><strong>500</strong> <span class="opacity-50">Followers</span></small>
-						</div></a
-					>
+						<div class="flex flex-col">
+							<h2 class="flex text-xl">{post.title}</h2>
+							<p class="flex font-medium">{post.description}</p>
+						</div>
+					</a>
 				</div>
 			{/each}
 		</Collection>
