@@ -2,10 +2,12 @@ import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
 
 import { env as publicEnv } from '$env/dynamic/public';
+
 import { env as privateEnv } from '$env/dynamic/private';
+import { getFirestore } from 'firebase-admin/firestore';
+import type { Post } from '$lib/types';
 
 export let app = getApps().at(0);
-
 if (
 	!app &&
 	publicEnv.PUBLIC_FB_PROJECT_ID &&
@@ -41,4 +43,17 @@ export const ccdCreateSessionCookie = async (idToken: string) => {
 export const ccdValidateSessionCookie = async (session: string) => {
 	const auth = getAuth(app);
 	return await auth.verifySessionCookie(session, true);
+};
+
+/* Firestore */
+
+export const getPost = async (slug: string) => {
+	const firestore = getFirestore();
+	const posts = await firestore.collection('/posts').where('slug', '==', slug).get();
+	if (posts.empty) {
+		return undefined;
+	}
+
+	const post: Post | undefined = { ...posts.docs.at(0)?.data(), id: posts.docs.at(0)?.id } as Post;
+	return post;
 };

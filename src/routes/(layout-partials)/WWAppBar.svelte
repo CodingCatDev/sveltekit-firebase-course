@@ -22,9 +22,7 @@
 	// Firebase
 	import { userStore } from 'sveltefire';
 	import { auth } from '$lib/client/firebase'; // your firebase auth instance
-
 	const user = userStore(auth);
-	user.subscribe((u) => console.log(u));
 
 	// Navigation
 	import { storeCurrentUrl } from '$lib/stores';
@@ -48,7 +46,7 @@
 				<AjAlt />
 			</a> -->
 			<!-- Title -->
-			<a href={$user?.uid ? '/dashboard' : '/'} class="flex items-center">
+			<a href={$user?.uid ? '/' : '/'} class="flex items-center">
 				<span class="hidden hover:brightness-110 xl:flex xl:gap-1 sm:text-xl md:text-3xl">
 					WhiskerWord
 				</span>

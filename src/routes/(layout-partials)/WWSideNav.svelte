@@ -1,6 +1,6 @@
 <script lang="ts">
 	// Stores
-	import { storeCurrentUrl } from '$lib/stores/stores';
+	import { storeCurrentUrl } from '$lib/stores';
 	import { getDrawerStore } from '@skeletonlabs/skeleton';
 	const drawerStore = getDrawerStore();
 

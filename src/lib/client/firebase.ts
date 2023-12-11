@@ -18,6 +18,8 @@ import {
 	type DocumentData,
 	initializeFirestore
 } from 'firebase/firestore';
+import { getStorage, type FirebaseStorage } from 'firebase/storage';
+
 import { httpsCallable, getFunctions, type Functions } from 'firebase/functions';
 import {
 	getAnalytics,
@@ -41,9 +43,9 @@ export const firebaseConfig = {
 export let app = getApps().at(0);
 export let auth: Auth;
 export let firestore: Firestore;
+export let storage: FirebaseStorage;
 export let functions: Functions;
 export let analytics: Analytics;
-
 if (
 	!app &&
 	browser &&
@@ -61,6 +63,7 @@ if (
 	// As httpOnly cookies are to be used, do not persist any state client side.
 	// setPersistence(auth, browserSessionPersistence);
 	firestore = initializeFirestore(app, { ignoreUndefinedProperties: true });
+	storage = getStorage(app);
 	functions = getFunctions(app);
 	analytics = getAnalytics(app);
 } else {

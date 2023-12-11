@@ -1,11 +1,7 @@
 <script lang="ts">
-	import LayoutWrapper from '../(layout-partials)/LayoutWrapper.svelte';
+	import LayoutWrapper from '$lib/shared/LayoutWrapper.svelte';
 	import GoogleAuth from './GoogleAuth.svelte';
-	import TwitterAuth from './TwitterAuth.svelte';
 	import GitHubAuth from './GitHubAuth.svelte';
-
-	// TODO: More actions
-	// export let form: ActionData;
 
 	import type { PageData } from './$types';
 	import EmailAuth from './EmailAuth.svelte';
